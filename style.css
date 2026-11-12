@@ -1,0 +1,527 @@
+/* 视觉参考：黄绿强调 + 浅色卡片 + 细网格底纹的发布页设计系统 */
+
+:root {
+  --bg: #f4f7ef;
+  --bg-card: #ffffff;
+  --bg-item: #f8faf3;
+  --border: rgba(0, 0, 0, .07);
+  --border-h: rgba(111, 154, 16, .4);
+  --accent: #5a8208;
+  --accent-deep: #42610a;
+  --accent-logo: #6f9a10;
+  --accent-bright: #8fbf2a;
+  --accent-dim: rgba(122, 166, 26, .09);
+  --accent-light: rgba(122, 166, 26, .15);
+  --text: #1a1c17;
+  --text-mid: #656b5c;
+  --text-dim: #979d8e;
+  --ok: #1a9e45;
+  --fail: #d93025;
+  --ok-glow: rgba(26, 158, 69, .25);
+  --fail-glow: rgba(217, 48, 37, .25);
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  min-height: 100vh;
+  font-family: "Outfit", "Noto Sans SC", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* 细网格底纹 + 顶部黄绿微光 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, .028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, .028) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: -340px;
+  left: 50%;
+  width: 900px;
+  height: 640px;
+  transform: translateX(-50%);
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgba(139, 190, 45, .12), transparent 72%);
+}
+
+::selection { background: var(--accent-light); color: var(--accent-deep); }
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 60px 24px 48px;
+}
+
+/* ---------- 头部 ---------- */
+.hero {
+  text-align: center;
+  margin-bottom: 40px;
+  animation: fadeUp .6s ease both;
+}
+
+.logo {
+  display: inline-block;
+  font-family: "Outfit", "Noto Sans SC", sans-serif;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: var(--accent-logo);
+}
+
+.logo::after {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 3px;
+  margin: 12px auto 0;
+  border-radius: 2px;
+  background: var(--accent-bright);
+  opacity: .6;
+}
+
+.notice {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 18px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.notice .plus { opacity: .6; }
+
+.notice kbd {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  letter-spacing: .5px;
+  color: var(--text-mid);
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, .1);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 2px 7px;
+}
+
+.tagline {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--text-mid);
+}
+
+.hero-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.live {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 11.5px;
+  letter-spacing: .02em;
+  color: var(--text-dim);
+}
+
+.live::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ok);
+  box-shadow: 0 0 8px var(--ok-glow);
+}
+
+body.static .live::before {
+  background: rgba(0, 0, 0, .16);
+  box-shadow: none;
+}
+
+.btn-check {
+  font-family: "Outfit", "Noto Sans SC", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-mid);
+  background: var(--bg-item);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color .2s, border-color .2s, background .2s;
+}
+
+.btn-check:hover:not(:disabled) {
+  color: var(--accent);
+  border-color: var(--border-h);
+  background: var(--accent-dim);
+}
+
+.btn-check:active { transform: scale(.98); }
+.btn-check:disabled { opacity: .45; cursor: not-allowed; }
+.btn-check:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+body.checking .btn-check { color: var(--accent); border-color: var(--border-h); }
+
+/* ---------- 分组卡片 ---------- */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  box-shadow: 0 2px 12px rgba(60, 80, 10, .06);
+  animation: fadeUp .6s ease both;
+}
+
+.card:nth-child(2) { animation-delay: .07s; }
+.card:nth-child(3) { animation-delay: .14s; }
+.card:nth-child(4) { animation-delay: .21s; }
+.card:nth-child(5) { animation-delay: .28s; }
+
+.card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px 24px 16px;
+}
+
+.card-main { min-width: 0; }
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.section-title::before {
+  content: "";
+  width: 3px;
+  height: 14px;
+  flex: none;
+  border-radius: 2px;
+  background: var(--accent-bright);
+}
+
+.card-desc {
+  margin-top: 7px;
+  padding-left: 13px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+.card-count {
+  flex: none;
+  margin-top: 1px;
+  padding: 3px 9px;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10.5px;
+  color: var(--text-dim);
+  background: var(--bg-item);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+/* ---------- 条目网格 ---------- */
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+  padding: 0 24px 24px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+  padding: 14px 16px;
+  background: var(--bg-item);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color .2s, background .2s, transform .15s, box-shadow .15s;
+}
+
+.item:hover {
+  background: #fff;
+  border-color: var(--border-h);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .07);
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* 推荐条目高亮（数据中 tone 为 gold） */
+.item.featured {
+  background: linear-gradient(135deg, #fbfdef 0%, #f2f8da 100%);
+  border-color: rgba(111, 154, 16, .42);
+}
+
+.item.featured:hover {
+  background: linear-gradient(135deg, #fdfff6 0%, #eff8d2 100%);
+  border-color: var(--accent-logo);
+  box-shadow: 0 4px 20px rgba(111, 154, 16, .2);
+}
+
+.item-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.name {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -.01em;
+  color: var(--text);
+  word-break: break-all;
+}
+
+.item.featured .name { color: #3f5408; }
+
+/* ---------- 状态 ---------- */
+.status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex: none;
+  white-space: nowrap;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--text-dim);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, .1);
+  transition: background .35s, box-shadow .35s;
+}
+
+.pill.up { color: var(--ok); }
+.pill.up .dot { background: var(--ok); box-shadow: 0 0 8px var(--ok-glow); }
+
+.pill.down { color: var(--fail); }
+.pill.down .dot { background: var(--fail); box-shadow: 0 0 8px var(--fail-glow); }
+
+.pill.checking .dot {
+  background: var(--accent-logo);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+.pill.unknown,
+.pill.flat { color: var(--text-dim); }
+
+.ms {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 9.5px;
+  letter-spacing: .02em;
+  color: var(--text-dim);
+}
+
+.item.featured .ms,
+.item.featured .status .pill.unknown,
+.item.featured .status .pill.flat { color: rgba(63, 84, 8, .55); }
+
+/* ---------- 描述与徽标 ---------- */
+.desc {
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-mid);
+}
+
+.item.featured .desc { color: #5d7810; }
+
+.item-foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 2px;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-width: 0;
+}
+
+.badge {
+  padding: 2px 8px;
+  font-size: 10.5px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  color: var(--text-mid);
+  background: rgba(0, 0, 0, .025);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+}
+
+.badge.gold {
+  color: #fff;
+  font-weight: 700;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.badge.blue {
+  color: var(--accent-deep);
+  background: var(--accent-dim);
+  border-color: rgba(122, 166, 26, .24);
+}
+
+.badge.green {
+  color: var(--ok);
+  background: rgba(26, 158, 69, .07);
+  border-color: rgba(26, 158, 69, .22);
+}
+
+.badge.muted { color: var(--text-dim); }
+
+.item.featured .badge:not(.gold) {
+  background: rgba(255, 255, 255, .65);
+  border-color: rgba(122, 166, 26, .28);
+  color: #5c7a09;
+}
+
+/* ---------- 跳转箭头 ---------- */
+.jump {
+  flex: none;
+  margin-left: auto;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  font-family: "Outfit", sans-serif;
+  font-size: 12px;
+  color: var(--text-dim);
+  opacity: .55;
+  border-radius: 6px;
+  transition: color .2s, opacity .2s, transform .2s, background .2s;
+}
+
+.item:hover .jump {
+  color: var(--accent);
+  opacity: 1;
+  background: var(--accent-dim);
+  transform: translate(1px, -1px);
+}
+
+/* ---------- 其它 ---------- */
+.foot {
+  padding-top: 30px;
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: .03em;
+  color: var(--text-dim);
+}
+
+.foot p { margin: 4px 0; }
+
+.mono {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  opacity: .85;
+}
+
+.empty {
+  padding: 36px 24px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+/* 检测后隐藏本机不可达的条目，以及整组都不可达的卡片 */
+.item.is-hidden,
+.card.is-hidden { display: none; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: .4; }
+  50% { opacity: 1; }
+}
+
+/* ---------- 响应式 ---------- */
+@media (max-width: 600px) {
+  .wrap { padding: 40px 16px 40px; }
+  .logo { font-size: 40px; }
+  .card-head { padding: 18px 18px 14px; }
+  .list { grid-template-columns: 1fr; padding: 0 18px 18px; }
+  .card-desc { padding-left: 13px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

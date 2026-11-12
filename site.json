@@ -1,0 +1,106 @@
+{
+  "site": {
+    "name": "MCDAO",
+    "title": "MCDAO · 发布页",
+    "subtitle": "收藏本页即可获取最新可用线路",
+    "domain": "mcdao-nav.net",
+    "keywords": "站点导航,发布页,备用线路",
+    "description": "站点导航发布页，提供官方发布渠道与全部可用线路。",
+    "footer": "建议收藏本页，线路变动会在此页第一时间更新"
+  },
+  "check": {
+    "enabled": true,
+    "method": "HEAD",
+    "timeout": 6000,
+    "interval": 60000,
+    "concurrency": 6
+  },
+  "groups": [
+    {
+      "key": "channel",
+      "title": "发布渠道",
+      "description": "官方发布页，域名变更时会在此更新",
+      "items": [
+        {
+          "slug": "github",
+          "name": "mc-dao.github.io",
+          "url": "https://mc-dao.github.io",
+          "badges": [
+            { "text": "永久可用", "tone": "gold" },
+            {"text": "推荐","tone": "blue"},
+            { "text": "GitHub 托管", "tone": "muted" }
+          ],
+          "description": "由 GitHub 全球 CDN 托管，强烈建议收藏",
+          "check": false
+        },
+        {
+          "slug": "Nav",
+          "name": "mcdao-nav.net",
+          "url": "https://mcdao-nav.net",
+          "badges": [
+            {"text": "永久可用","tone": "gold"},
+            {"text": "推荐","tone": "blue"},
+            {"text": "AWS 托管","tone": "muted"}
+          ],
+          "description": "由 AWS 全球 CDN 托管，强烈建议收藏",
+          "check": false
+        }
+      ]
+    },
+    {
+      "key": "line",
+      "title": "可用网址",
+      "description": "按线路编号排列，全部为官方域名",
+      "items": [
+        {
+          "slug": "line-01",
+          "name": "mc-dao.io",
+          "url": "https://mc-dao.io",
+          "badges": [
+            {
+              "text": "线路 01",
+              "tone": "blue"
+            },
+            {
+              "text": "主站",
+              "tone": "green"
+            }
+          ]
+        },
+        {
+          "slug": "line-02",
+          "name": "mc-dao.cc",
+          "url": "https://mc-dao.cc",
+          "badges": [
+            {
+              "text": "线路 02",
+              "tone": "blue"
+            }
+          ]
+        },
+        {
+          "slug": "line-03",
+          "name": "mcdao.cc",
+          "url": "https://mcdao.cc",
+          "badges": [
+            {
+              "text": "线路 03",
+              "tone": "blue"
+            }
+          ]
+        },
+        {
+          "slug": "line-04",
+          "name": "mc-dao.work",
+          "url": "https://mc-dao.work",
+          "badges": [
+            {
+              "text": "线路 04",
+              "tone": "blue"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
